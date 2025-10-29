@@ -1,3 +1,3 @@
 # ohtuvarasto
 
-https://github.com/OWNER/REPOSITORY/actions/workflows/WORKFLOW-FILE/badge.svg
+[![CI](https://github.com/VeetiKu/ohtuvarasto/actions/workflows/main.yml/badge.svg)](https://github.com/VeetiKu/ohtuvarasto/actions/workflows/main.yml)
