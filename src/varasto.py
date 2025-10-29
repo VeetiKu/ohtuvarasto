@@ -45,4 +45,3 @@ class Varasto:
         return f"saldo = {self.saldo}, vielä tilaa {self.paljonko_mahtuu()}"
     
 
-#CHANGEEE
