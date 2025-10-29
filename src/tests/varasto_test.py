@@ -49,7 +49,7 @@ class TestVarasto(unittest.TestCase):
         
     def test_lisaa_yli_tilavuuden(self):
         self.varasto.lisaa_varastoon(15)
-        self.assertAlmostEqual(self.varasto.saldo, 9)
+        self.assertAlmostEqual(self.varasto.saldo, 10)
         
     def test_ottaminen_lisaa_tilaa(self):
         self.varasto.lisaa_varastoon(8)
