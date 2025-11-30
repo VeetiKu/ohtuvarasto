@@ -2,4 +2,4 @@ __pycache__/
 .pytest_cache/
 .tmp
 .coverage
-htmlcov/
+htmlcov/warehouse.db
