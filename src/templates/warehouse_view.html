@@ -12,6 +12,8 @@
         <h1>{{ warehouse['name'] }}</h1>
         <p><strong>Location:</strong> {{ warehouse['location'] or 'Not specified' }}</p>
         <p><strong>Capacity:</strong> {{ warehouse['capacity'] }}</p>
+        <p><strong>Used:</strong> {{ used_capacity }}</p>
+        <p><strong>Remaining Capacity:</strong> {{ remaining_capacity }}</p>
     </div>
     <div class="actions">
         <a href="{{ url_for('edit_warehouse', warehouse_id=warehouse['id']) }}" class="btn btn-secondary">Edit Warehouse</a>

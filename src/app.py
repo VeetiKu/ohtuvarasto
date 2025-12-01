@@ -89,10 +89,14 @@ def view_warehouse(warehouse_id):
         'SELECT * FROM items WHERE warehouse_id = ?',
         (warehouse_id,)
     ).fetchall()
+    used_capacity = sum(item['quantity'] for item in items)
+    remaining_capacity = warehouse['capacity'] - used_capacity
     return render_template(
         'warehouse_view.html',
         warehouse=warehouse,
-        items=items
+        items=items,
+        used_capacity=used_capacity,
+        remaining_capacity=remaining_capacity
     )
 
 
