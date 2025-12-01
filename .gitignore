@@ -3,3 +3,4 @@ __pycache__/
 .tmp
 .coverage
 htmlcov/
+warehouse.db
