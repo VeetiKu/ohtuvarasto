@@ -14,6 +14,13 @@ def get_db():
     return db
 
 
+def _safe_float(value, default=0.0):
+    try:
+        return float(value) if value else default
+    except (ValueError, TypeError):
+        return default
+
+
 @app.teardown_appcontext
 def close_connection(_exception):
     db = getattr(g, '_database', None)
@@ -62,7 +69,7 @@ def new_warehouse():
         db.execute(
             'INSERT INTO warehouses (name, location, capacity) '
             'VALUES (?, ?, ?)',
-            (name, location, float(capacity) if capacity else 0)
+            (name, location, _safe_float(capacity))
         )
         db.commit()
         return redirect(url_for('index'))
@@ -99,7 +106,7 @@ def edit_warehouse(warehouse_id):
         db.execute(
             'UPDATE warehouses SET name = ?, location = ?, capacity = ? '
             'WHERE id = ?',
-            (name, location, float(capacity) if capacity else 0, warehouse_id)
+            (name, location, _safe_float(capacity), warehouse_id)
         )
         db.commit()
         return redirect(url_for('view_warehouse', warehouse_id=warehouse_id))
@@ -137,8 +144,7 @@ def new_item(warehouse_id):
         db.execute(
             'INSERT INTO items (warehouse_id, name, quantity, description) '
             'VALUES (?, ?, ?, ?)',
-            (warehouse_id, name, float(quantity) if quantity else 0,
-             description)
+            (warehouse_id, name, _safe_float(quantity), description)
         )
         db.commit()
         return redirect(url_for('view_warehouse', warehouse_id=warehouse_id))
@@ -163,8 +169,7 @@ def _handle_item_update(db, warehouse_id, item_id):
     db.execute(
         'UPDATE items SET name = ?, quantity = ?, description = ? '
         'WHERE id = ? AND warehouse_id = ?',
-        (name, float(quantity) if quantity else 0, description,
-         item_id, warehouse_id)
+        (name, _safe_float(quantity), description, item_id, warehouse_id)
     )
     db.commit()
 
@@ -202,4 +207,4 @@ def delete_item(warehouse_id, item_id):
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    app.run(debug=False)
